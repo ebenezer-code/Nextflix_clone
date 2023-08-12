@@ -24,7 +24,7 @@ mongoose
 
 // Define routes (sample)
 app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to Netflx Clone App!' });
+  res.json({ message: 'Welcome to Netflix Clone App!' });
 });
 app.use('/api/v1/users', userRouter);
 
@@ -32,3 +32,5 @@ app.use('/api/v1/users', userRouter);
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+
