@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import LandingPage from "./pages/LandingPage";
 
 function App() {
   const [toggleColor, setToggleColor] = useState(true);
@@ -12,14 +11,22 @@ function App() {
     AOS.init();
   }, [toggleColor]);
 
-  // return (
-  //   <div className = {`${toggleColor ? "bg-black text-white": "bg-white text-black"} min-h-[100vh] flex items-center justify-center space-x-6`} data-aos = "fade-up" data-aos-duration = "3000">
-  //     <h1 className= "italic text-[15px]">I Love React</h1>
-  //     <p className="text-[pink] text-[10px]">I Must always code</p>
-  //     <button onClick={handleToggle} className="text-[15px] border p-[10px]"> {toggleColor ? "Light Mode": "Dark Mode"}</button>
-  //   </div>
-  // );
-  return <LandingPage />;
+  return (
+    <div
+      className={`${
+        toggleColor ? "bg-black text-white" : "bg-white text-black"
+      } min-h-[100vh] flex items-center justify-center space-x-6`}
+      data-aos="fade-up"
+      data-aos-duration="3000"
+    >
+      <h1 className="italic text-[15px]">I Love React</h1>
+      <p className="text-[pink] text-[10px]">I Must always code</p>
+      <button onClick={handleToggle} className="text-[15px] border p-[10px]">
+        {" "}
+        {toggleColor ? "Light Mode" : "Dark Mode"}
+      </button>
+    </div>
+  );
 }
 
 export default App;
