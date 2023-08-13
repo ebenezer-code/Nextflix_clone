@@ -23,7 +23,7 @@ const isAuthenticated = (req, res, next) => {
     if (!decoded || !decoded.userId) {
       return res.status(403).json({ message: 'Invalid token payload' });
     }
-    req.user = decoded;
+    req.userId = decoded.userId;
     next();
   });
 };
