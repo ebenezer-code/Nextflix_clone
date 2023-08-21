@@ -5,7 +5,7 @@ import { FcLock } from "react-icons/fc";
 import Footer from "../../components/Footer";
 import PaystackPop from "@paystack/inline-js";
 
-const Payment = () => {
+const Payment = ({ amount }) => {
   return (
     <div>
       <Navbar text="Sign Out" href="/login" />
@@ -30,7 +30,7 @@ const Payment = () => {
           </small>
           <div
             className=" border-2 border-gray-300 rounded-md p-4 flex items-center"
-            onClick={() => handlePayment()}
+            onClick={() => handlePayment(amount)}
           >
             <div className=" grow flex flex-col md:flex-row gap-2">
               <p className="">Credit or Debit Card</p>
@@ -77,15 +77,16 @@ const Payment = () => {
   );
 };
 
-const handlePayment = () => {
+const handlePayment = (amount) => {
   const paystack = new PaystackPop();
   paystack.newTransaction({
     key: "pk_test_aa69027aa9cd0d4d8c982dc1928559e94a66e38e",
     email: "example@email.com",
-    amount: 10000 * 100,
+    amount: amount * 100,
 
     onSuccess: (transaction) => {
       // Payment complete! Reference: transaction.reference
+      window.location = "/movies";
     },
     onCancel: () => {
       // user closed popup
