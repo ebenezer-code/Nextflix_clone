@@ -1,16 +1,15 @@
-import React, { useState } from 'react'
-import { MdDone } from 'react-icons/md'
-import Navbar from '../../components/Navbar'
-import Footer from '../../components/Footer'
+import React, { useState } from "react";
+import { MdDone } from "react-icons/md";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
+import { plans } from "./data";
 
-const Plan = ({ plans, nextStep }) => {
-  const [selectedPlan, setSelectedPlan] = useState(plans[0])
-
+const Plan = ({ nextStep, selectedPlan, setSelectedPlan }) => {
   const handlePlanChange = (plan) => {
-    setSelectedPlan(plan)
-  }
+    setSelectedPlan(plan);
+  };
 
-  console.log(selectedPlan)
+  console.log(selectedPlan);
 
   return (
     <div>
@@ -29,8 +28,8 @@ const Plan = ({ plans, nextStep }) => {
               key={plan.id}
               className={`flex flex-col items-center p-1 gap-2 rounded ${
                 selectedPlan.id === plan.id
-                  ? 'border-2 border-red-500 scale-105'
-                  : 'border border-gray-300'
+                  ? "border-2 border-red-500 scale-105"
+                  : "border border-gray-300"
               }`}
               onClick={() => handlePlanChange(plan)}
             >
@@ -47,8 +46,8 @@ const Plan = ({ plans, nextStep }) => {
                     <div
                       className={`flex items-center justify-center w-6 h-6 rounded-full ${
                         selectedPlan.id === plan.id
-                          ? 'bg-red-500'
-                          : 'bg-gray-300'
+                          ? "bg-red-500"
+                          : "bg-gray-300"
                       }`}
                     >
                       <svg
@@ -92,7 +91,7 @@ const Plan = ({ plans, nextStep }) => {
       </div>
       <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default Plan
+export default Plan;

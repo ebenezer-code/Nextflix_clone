@@ -1,131 +1,36 @@
-import { useForm } from 'react-hook-form'
-import { useState } from 'react'
-import { BsLaptop } from 'react-icons/bs'
-import { SlScreenDesktop } from 'react-icons/sl'
-import { CiMobile1 } from 'react-icons/ci'
-import { MdDone } from 'react-icons/md'
-import Plan from './Plan'
-import Navbar from '../../components/Navbar'
-import Footer from '../../components/Footer'
-
-const plans = [
-  {
-    id: 1,
-    name: 'Premium',
-    resolution: '4K + HDR',
-    price: 4400,
-    features: [
-      {
-        name: 'Monthly price',
-        description: 'N4400',
-      },
-      {
-        name: 'Resolution',
-        description: '4K (Ultra HD) + HDR',
-      },
-      {
-        name: 'Video quality',
-        description: 'Best',
-      },
-      {
-        name: 'Supported devices',
-        description: 'TV,  Computer, Phone, Tablet',
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: 'Standard',
-    resolution: '1080p',
-    price: 3600,
-    features: [
-      {
-        name: 'Monthly price',
-        description: 'N3600',
-      },
-      {
-        name: 'Resolution',
-        description: '1080p (Full HD)',
-      },
-      {
-        name: 'Video quality',
-        description: 'Better',
-      },
-      {
-        name: 'Supported devices',
-        description: 'TV,  Computer, Phone, Tablet',
-      },
-    ],
-  },
-  {
-    id: 3,
-    name: 'Basic',
-    resolution: '720p',
-    price: 2900,
-    features: [
-      {
-        name: 'Monthly price',
-        description: 'N2900',
-      },
-      {
-        name: 'Resolution',
-        description: '720p (HD)',
-      },
-      {
-        name: 'Video quality',
-        description: 'Good',
-      },
-      {
-        name: 'Supported devices',
-        description: 'TV,  Computer, Phone, Tablet',
-      },
-    ],
-  },
-  {
-    id: 4,
-    name: 'Mobile',
-    resolution: '480p',
-    price: 1200,
-    features: [
-      {
-        name: 'Monthly price',
-        description: 'N1200',
-      },
-      {
-        name: 'Resolution',
-        description: '480p',
-      },
-      {
-        name: 'Video quality',
-        description: 'Good',
-      },
-      {
-        name: 'Supported devices',
-        description: 'Phone, Tablet',
-      },
-    ],
-  },
-]
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { BsLaptop } from "react-icons/bs";
+import { SlScreenDesktop } from "react-icons/sl";
+import { CiMobile1 } from "react-icons/ci";
+import { MdDone } from "react-icons/md";
+import Plan from "./Plan";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
+import Payment from "./Payment";
+import { plans } from "./data";
 
 const Signup = () => {
-  const [currentStep, setCurrentStep] = useState(0)
+  console.log(plans);
+  const [currentStep, setCurrentStep] = useState(0);
+  const [selectedPlan, setSelectedPlan] = useState(plans?.[0]);
 
   const nextStep = () => {
-    setCurrentStep(currentStep + 1)
-  }
+    setCurrentStep(currentStep + 1);
+  };
   const prevStep = () => {
-    setCurrentStep(currentStep - 1)
-  }
+    setCurrentStep(currentStep - 1);
+  };
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm()
+  } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data)
-  }
+    console.log(data);
+  };
 
   const renderStepContent = (step) => {
     switch (step) {
@@ -142,7 +47,7 @@ const Signup = () => {
                 <div className="w-full flex flex-col">
                   <input
                     type="email"
-                    {...register('email', { required: true })}
+                    {...register("email", { required: true })}
                     className="p-2 bg-[#010000] text-white outline-none ring-1 ring-gray-700  focus:ring-inset focus:ring-red-800 rounded"
                     placeholder="Email address"
                   />
@@ -171,7 +76,7 @@ const Signup = () => {
               </form>
             </div>
           </div>
-        )
+        );
       case 1:
         return (
           <div>
@@ -210,7 +115,7 @@ const Signup = () => {
             </div>
             <Footer />
           </div>
-        )
+        );
       case 2:
         return (
           <div>
@@ -234,7 +139,7 @@ const Signup = () => {
                   <div className="w-full flex flex-col gap-2">
                     <input
                       type="email"
-                      {...register('email', { required: true })}
+                      {...register("email", { required: true })}
                       className="p-2 bg-white text-black outline-none ring-1 ring-gray-700  focus:ring-inset focus:ring-red-800 rounded"
                       placeholder="Email address"
                     />
@@ -247,7 +152,7 @@ const Signup = () => {
                   <div className="w-full flex flex-col">
                     <input
                       type="password"
-                      {...register('password', { required: true })}
+                      {...register("password", { required: true })}
                       className="p-2 bg-white text-black outline-none ring-1 ring-gray-700  focus:ring-inset focus:ring-red-800 rounded"
                       placeholder="Password"
                     />
@@ -275,7 +180,7 @@ const Signup = () => {
             </div>
             <Footer />
           </div>
-        )
+        );
       case 3:
         return (
           <div>
@@ -322,16 +227,23 @@ const Signup = () => {
             </div>
             <Footer />
           </div>
-        )
+        );
       case 4:
-        return <Plan plans={plans} nextStep={nextStep} />
+        return (
+          <Plan
+            plans={plans}
+            nextStep={nextStep}
+            selectedPlan={selectedPlan}
+            setSelectedPlan={setSelectedPlan}
+          />
+        );
       case 5:
-        return <h1>Payment</h1>
+        return <Payment amount={selectedPlan?.price} />;
       default:
-        return null
+        return null;
     }
-  }
-  return <div>{renderStepContent(currentStep)}</div>
-}
+  };
+  return <div>{renderStepContent(currentStep)}</div>;
+};
 
-export default Signup
+export default Signup;
